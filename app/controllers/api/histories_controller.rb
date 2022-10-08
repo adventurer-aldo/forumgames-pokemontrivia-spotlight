@@ -1,9 +1,11 @@
-class HistoriesController < ApplicationController
+class Api::HistoriesController < ApplicationController
   before_action :set_history, only: %i[ show edit update destroy ]
 
   # GET /histories or /histories.json
   def index
-    @histories = History.all
+    @histories = History.all.order(id: :desc).limit(30).map { |history| {id: history.id, action: history.action, done_at: history.done_at.to_time.to_s[5..18]} }
+
+    render json: @histories
   end
 
   # GET /histories/1 or /histories/1.json

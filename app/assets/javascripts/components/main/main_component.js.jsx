@@ -4,6 +4,7 @@ function GameMain(props) {
   [players, setPlayers] = React.useState([]);
   [teams, setTeams] = React.useState([]);
   [total, setTotal] = React.useState(0);
+  [histories, setHistories] = React.useState([]);
   
   [username, setUsername] = React.useState('');
   [game, setGame] = React.useState('');
@@ -29,6 +30,10 @@ function GameMain(props) {
             ttotal += element.score
           });
           setTotal(ttotal);
+          axios.get('/api/histories')
+          .then(response => {
+            setHistories(response.data)
+          })
         });
       })
     });
@@ -89,7 +94,7 @@ function GameMain(props) {
       <CreateData date={props.date} teams={teams} username={username} game={game} addGame={addGame} addPlayer={addPlayer}
       games={games} changeGame={changeGame} changeTeam={changeTeam} changeSection={changeSection}
       changeName={changeName} />
-      <ManipulateData total={total} marowak={props.marowak} decidueye={props.decidueye} games={games} teams={teams}
+      <ManipulateData histories={histories} total={total} marowak={props.marowak} decidueye={props.decidueye} games={games} teams={teams}
       players={players.sort((a,b) => b.points - a.points)} addPoint={addPoint} deletePoint={deletePoint} />
     </div>
   )
