@@ -4,7 +4,9 @@ class Api::TeamsController < ApplicationController
   # GET /teams or /teams.json
   def index
     @teams = Team.all.map do |team|
-      { id: team.id, name: team.name, score: team.score }
+      { id: team.id, name: team.name, score: team.score, added: team.players.map do |player|
+	  player.points.where(game_id: Game.current_ids).map(&:value).sum
+       end.sum }
     end
     render json: @teams || []
   end
