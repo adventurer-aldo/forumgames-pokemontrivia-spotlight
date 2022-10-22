@@ -4,7 +4,7 @@ class Api::GamesController < ApplicationController
   # GET /games or /games.json
   def index
     @games = Game.where(date: Time.now.to_date).map do |game|
-      { id: game.id, name: game.name}
+      { id: game.id, name: game.name, url: game.url, section: game.section}
     end
 
     render json: @games
@@ -25,7 +25,7 @@ class Api::GamesController < ApplicationController
 
   # POST /games or /games.json
   def create
-    @game = Game.new(name: game_params['name'], section: game_params['section'], date: Time.now.to_date)
+    @game = Game.new(name: game_params['name'], section: game_params['section'], url: game_params['url'], date: Time.now.to_date)
     @game.save!
     Player.all.each do |player|
       Point.create(player_id: player.id, game_id: @game.id)
@@ -55,6 +55,6 @@ class Api::GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.fetch(:game, {}).permit(:name, :section)
+    params.fetch(:game, {}).permit(:name, :section, :url)
   end
 end

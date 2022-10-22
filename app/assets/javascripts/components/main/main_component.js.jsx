@@ -8,6 +8,7 @@ function GameMain(props) {
   
   [username, setUsername] = React.useState('');
   [game, setGame] = React.useState('');
+  [gameUrl, setGameUrl] = React.useState('');
   [selectedTeam, setSelectedTeam] = React.useState('1');
   [selectedSection, setSelectedSection] = React.useState('0');
 
@@ -48,9 +49,10 @@ function GameMain(props) {
   }
   
   const addGame = () => {
-    axios.post('/api/games', {authenticity_token: props.auth_token, game: {name: game, section: selectedSection}})
+    axios.post('/api/games', {authenticity_token: props.auth_token, game: {name: game, section: selectedSection, url: gameUrl}})
     .then(() => {
       setGame('');
+      setGameUrl('');
       reloadData();
     })
   }
@@ -74,6 +76,11 @@ function GameMain(props) {
     let value = event.target.value;
     setUsername(value);
   }
+  
+  const changeGameUrl = (event) => {
+    let value = event.target.value;
+    setGameUrl(value);
+  }
 
   const addPoint = (player_id) => {
     axios.patch('/api/points/1', {authenticity_token: props.auth_token, point: {player_id: player_id}}).then(() => {
@@ -92,7 +99,7 @@ function GameMain(props) {
   return (
     <div>
       <CreateData date={props.date} teams={teams} username={username} game={game} addGame={addGame} addPlayer={addPlayer}
-      games={games} changeGame={changeGame} changeTeam={changeTeam} changeSection={changeSection}
+      games={games} changeGame={changeGame} changeTeam={changeTeam} changeSection={changeSection} url={gameUrl} changeUrl={changeGameUrl}
       changeName={changeName} />
       <ManipulateData histories={histories} total={total} marowak={props.marowak} decidueye={props.decidueye} games={games} teams={teams}
       players={players.sort((a,b) => b.points - a.points)} addPoint={addPoint} deletePoint={deletePoint} />

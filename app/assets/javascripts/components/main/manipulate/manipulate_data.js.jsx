@@ -8,7 +8,7 @@ function ManipulateData(props) {
             <Scoreboard players={props.players} games={props.games} addPoint={props.addPoint}
             marowak={props.marowak} decidueye={props.decidueye} deletePoint={props.deletePoint} />
             <BBScoreboard marowak={props.marowak} decidueye={props.decidueye} players={props.players}
-            total={props.total} teams={props.teams} />
+            total={props.total} teams={props.teams} games={props.games}/>
           </div>
           <History histories={props.histories} />
         </div>

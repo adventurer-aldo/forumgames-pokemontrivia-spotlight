@@ -12,7 +12,8 @@ function CreateData(props) {
         <button className="input-group-text btn btn-dark" id="basic-addon2" onClick={props.addPlayer}><span className="fw-bold fs-6 px-2">+</span>Add Player</button>
       </div>
       <div className="input-group mb-3">
-        <input type="text" name="player[name]" value={props.game} onChange={(event) => props.changeGame(event)} className="form-control" placeholder="Game's title" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+        <input type="text" name="game[name]" value={props.game} onChange={(event) => props.changeGame(event)} className="form-control" placeholder="Game's title" aria-label="Recipient's username" aria-describedby="basic-addon2" />
+        <input type="text" name="game[url]" value={props.url} onChange={(event) => props.changeUrl(event)} className="form-control" placeholder="Link to the game" aria-label="Recipient's username" aria-describedby="basic-addon2" />
         <select name="game[section]" className="btn btn-dark" value={props.selectedSection} onChange={(event) => props.changeSection(event)}>
           <option value='0'>Forum Games</option>
           <option value='1'>Pokémon Trivia</option>

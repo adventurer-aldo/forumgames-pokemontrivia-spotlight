@@ -1,0 +1,23 @@
+<%= render 'nav' %>
+<div class="text-bg-light overflow-scroll">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Player</th>
+        <% @games.each do |game| %>
+          <th scope="col" class="text-center">Day <%= game.id - 13 %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+    <% @players.each do |player| %>
+      <tr>
+        <th scope="row"><%= player.name %></th>
+        <% player.points.sort_by(&:game_id).each do |point| %>
+          <td class="text-center"><%= point.value %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

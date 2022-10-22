@@ -6,7 +6,7 @@ class Api::PlayersController < ApplicationController
     @players = Player.all.map do |player|
       { id: player.id, name: player.name, team: player.team_id, points: player.points.map(&:value).sum,
         can_earn: player.points.where('value < 10').where(game_id: Game.current_ids).exists?, complete: player.points.where(game_id: Game.current_ids).length == player.points.where(game_id: Game.current_ids, value: 10).length,
-        added: player.points.where(game_id: Game.current_ids).map(&:value).sum }
+        added: player.points.where(game_id: Game.current_ids).map(&:value).sum, eligible: player.points.order(game_id: :desc).limit(5).map(&:value).sum == 50 }
     end
 
     render json: @players || []
