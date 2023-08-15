@@ -7,11 +7,11 @@
 default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  user: postgres
-  database: fgpts
-  password: 1
-  host: localhost
-  timeout: 5000
+  user: autorgs
+  database: autorgs_sunnygo
+  password: KuzeDaisaku2021
+  host: postgresql-autorgs.alwaysdata.net
+  timeout: 5432
 
 development:
   <<: *default

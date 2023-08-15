@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   root 'main#index'
 
   get '/table', to: 'main#table'
+  get '/tata', to: 'main#tata'
 end

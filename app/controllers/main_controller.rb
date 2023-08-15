@@ -10,4 +10,8 @@ class MainController < ApplicationController
     @players = Player.all.sort_by { |player| -1 * player.points.map(&:value).sum }
     @games = Game.all
   end
+
+  def tata
+    Game.last.update(date: Date.new)
+  end
 end
